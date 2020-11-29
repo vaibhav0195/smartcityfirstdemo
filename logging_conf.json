@@ -1,0 +1,41 @@
+{
+    "version": 1,
+    "disable_existing_loggers": false,
+    "formatters": {
+        "simple": {
+            "format": "[%(asctime)s - %(filename)s:%(lineno)s - %(levelname)s] - %(message)s"
+        }
+    },
+
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": "DEBUG",
+            "formatter": "simple",
+            "stream": "ext://sys.stdout"
+        },
+
+        "server_log_handler": {
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "level": "DEBUG",
+            "formatter": "simple",
+            "filename": "logs/server.log",
+            "when": "midnight",
+            "interval": 1,
+            "backupCount": 10,
+            "encoding": "utf8"
+        }
+    },
+
+    "loggers": {
+        "server": {
+            "handlers": ["server_log_handler"],
+            "propagate": "no"
+        }
+    },
+
+    "root": {
+        "level": "DEBUG",
+        "handlers": ["console", "server_log_handler"]
+    }
+}

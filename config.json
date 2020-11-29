@@ -1,0 +1,6 @@
+{
+  "endpoint": "localhost",
+  "port": 7200,
+  "appport": 1112,
+  "repoID": "keAssignment"
+}

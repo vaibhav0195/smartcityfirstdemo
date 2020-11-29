@@ -1,0 +1,16 @@
+app_mode:DEPLOY
+log_level:DEBUG
+log_to_file:0
+log_file:server.log
+max_parallel_process:1
+deploy_port:1111
+debug_port:1112
+data_folder:/home/ubuntu/mlocr/mlocrappdemo/data
+database_host:dbinstance1.c4decjvaznn2.us-east-1.rds.amazonaws.com
+database_name:mlocr_demo
+database_username:ubuntu
+database_password:Ankitag-9
+bucket_name:mlocrdatafiles
+seq2seq_path:/home/ubuntu/mlocr/seq2seq
+server_config_filepath:/var/mlocrappdemo/config/server_config.txt
+log_conf_file:logging_conf.json
