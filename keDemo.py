@@ -22,7 +22,7 @@ def newDemoScreen():
 @demos.route('/', methods=['POST'])
 def upload_file_browse():
 	logger.info("got post requst")
-	queryId = request.data.decode("utf-8")
+	queryId = json.loads(request.data)
 	query = queryHash[queryId]
 	results = sqHelper.execute(query)
 	return json.dumps({'success':True,'heading':results[0],'rowValues':results[1:]})

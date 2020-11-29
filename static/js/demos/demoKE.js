@@ -1,4 +1,6 @@
-function changeImage(element){
+$( document ).ready(function() {
+    console.log( "ready!" );
+    function changeImage(element){
     $.get('thumb?imageName=' + element.name, function(data){
         try{
             document.getElementById("labelledMatter").style.visibility = "visible";
@@ -36,20 +38,28 @@ $(document).on('change', '.btn-file :file', function() {
    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
    $("#button").click();
 });
-
-$("form#fileUploadForm").submit(function(){
+//console.log($("#fileUploadForm"));
+$("#fileUploadForm").click(function(){
    $("#uploaddiv").hide()
 
    $("#parentupload").append("<div class=\"col-lg-12 col-sm-6 col-12 uploaddivnew\"><span class=\"file-input btn btn-block btn-primary btn-file\"><h4><b>Processing&hellip;</b></h4></span></div>")
     $('#jinjaTable').hide();
     $('#tableWithServerData').hide();
    $(".textcont").remove();
-   document.getElementById("orignalImage").src = '';
-   var formData = this[0]["value"];
+   var county = $('#inputGroupSelect01 option:selected');
+   var season = $('#inputGroupSelect02 option:selected');
+   var abundance = $('#inputGroupSelect03 option:selected');
+   var lifestage = $('#inputGroupSelect04 option:selected');
+   var gender = $('#inputGroupSelect06 option:selected');
+   var scientistname = $('#inputGroupSelect07 option:selected');
+//   var selected = $('#my-dropdown option:selected');
+   var dataTosend = {"county":county[0].text,"season":season[0].text,"abundance":abundance[0].text,"lifestage":lifestage[0].text,
+   "gender":gender[0].text,"scientistname":scientistname[0].text};
+//   var selected = $('#my-dropdown option:selected');
    $.ajax({
        url: window.location.pathname,
        type: 'POST',
-       data: formData,
+       data: JSON.stringify(dataTosend),
        async: true,
        success: function (data) {
             parsedData = JSON.parse(data)
@@ -99,3 +109,5 @@ $("form#fileUploadForm").submit(function(){
 
    return false;
 });
+});
+
