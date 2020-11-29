@@ -28,9 +28,9 @@ if __name__ == '__main__':
 	logger.info('Registering demo APIs blueprints')
 	app.register_blueprint(keDemo.demos)
 
-	@app.route('/favicon.ico')
-	def favicon():
-		return send_from_directory(os.path.abspath('static/'),'bird.png')
+	# @app.route('/favicon.ico')
+	# def favicon():
+	# 	return send_from_directory(os.path.abspath('static/'),'bird.png')
 
 	@app.after_request
 	def setHeaders(response):

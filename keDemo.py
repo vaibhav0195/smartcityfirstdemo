@@ -23,6 +23,6 @@ def newDemoScreen():
 def upload_file_browse():
 	logger.info("got post requst")
 	queryId = json.loads(request.data)
-	query = queryHash[queryId]
+	query = queryHash["Q1"]
 	results = sqHelper.execute(query)
 	return json.dumps({'success':True,'heading':results[0],'rowValues':results[1:]})
