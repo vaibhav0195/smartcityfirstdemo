@@ -47,15 +47,15 @@ $("#fileUploadForm").click(function(){
     $('#tableWithServerData').hide();
    $(".textcont").remove();
    var county = $('#inputGroupSelect01 option:selected');
-   var season = $('#inputGroupSelect02 option:selected');
-   var abundance = $('#inputGroupSelect03 option:selected');
-   var lifestage = $('#inputGroupSelect04 option:selected');
-   var gender = $('#inputGroupSelect06 option:selected');
-   var scientistname = $('#inputGroupSelect07 option:selected');
-//   var selected = $('#my-dropdown option:selected');
-   var dataTosend = {"county":county[0].text,"season":season[0].text,"abundance":abundance[0].text,"lifestage":lifestage[0].text,
-   "gender":gender[0].text,"scientistname":scientistname[0].text};
-//   var selected = $('#my-dropdown option:selected');
+   var extraVars = document.getElementById('extraInp').value;
+   var dataTosend = {"queryHash":county[0].text,"queryParams":extraVars};
+   var tables = document.getElementsByTagName("TABLE");
+   for (var i=tables.length-1; i>=0;i-=1)
+   {
+       if (tables[i]) {
+            tables[i].parentNode.removeChild(tables[i]);
+            }
+   }
    $.ajax({
        url: window.location.pathname,
        type: 'POST',
@@ -63,11 +63,15 @@ $("#fileUploadForm").click(function(){
        async: true,
        success: function (data) {
             parsedData = JSON.parse(data)
-            var myTableDiv = document.getElementById("jinjaTable")
-            var table = document.createElement('TABLE')
-            var tableBody = document.createElement('TBODY')
+            var myTableDiv = document.getElementById("jinjaTable");
+            var table = document.createElement('TABLE');
+            table.classList.add("table");
+            table.classList.add("table-striped");
+            table.classList.add("table-sm");
+            table.classList.add("table-bordered");
+            var tableBody = document.createElement('TBODY');
 
-            table.border = '1'
+//            table.border = '1'
             table.appendChild(tableBody);
 
             var heading = parsedData.heading;
@@ -76,7 +80,7 @@ $("#fileUploadForm").click(function(){
             tableBody.appendChild(tr);
             for (var i = 0; i < heading.length; i++) {
                 var th = document.createElement('TH')
-                th.width = '75';
+//                th.width = '75';
                 th.appendChild(document.createTextNode(heading[i]));
                 tr.appendChild(th);
 
@@ -90,7 +94,7 @@ $("#fileUploadForm").click(function(){
                 }
                 tableBody.appendChild(tr);
             }
-             myTableDiv.appendChild(table)
+             myTableDiv.appendChild(table);
             $('.uploaddivnew').remove();
             $("#jinjaTable").show();
             $("#uploaddiv").show();
