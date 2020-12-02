@@ -4,6 +4,9 @@ logging.basicConfig(format='[%(asctime)s - %(filename)s:%(lineno)s - %(levelname
 logger = logging.getLogger(__name__)
 
 class SQHelper:
+    """
+    Helper class to run the sparql query over the graphdb endpoints
+    """
     def __init__(self,hostName,portName,repoName):
         self._hostName = hostName
         self._hostName = portName
@@ -18,6 +21,15 @@ class SQHelper:
         self._db = db
 
     def execute(self,query):
+        """
+        execute the query and return a 2d list as result.
+        First row of the results are the headers and the rows after it are the values.
+        Args:
+            query: query to execute.
+
+        Returns:
+
+        """
         self._db.setHTTPAuth(BASIC)
         self._db.setCredentials('login', 'password')
         self._db.setReturnFormat(JSON)
@@ -28,6 +40,7 @@ class SQHelper:
 
     def convertJson(self,result):
         """
+        convert json result to the array
         return array of results
         Args:
             result: result from query

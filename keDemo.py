@@ -21,6 +21,11 @@ def newDemoScreen():
 
 @demos.route('/', methods=['POST'])
 def upload_file_browse():
+	"""
+	this is the api which recives the question from the front end and execute a relavnt query at the backend and resends the results.
+	Returns:
+
+	"""
 	logger.info("got post requst")
 	queryData = json.loads(request.data)
 	queryId   = queryData["queryHash"].split(':')[0]

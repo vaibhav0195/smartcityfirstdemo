@@ -1,3 +1,4 @@
+# This file contains all the queries we need to execute.
 Q1 = """
 SELECT DISTINCT ?TaxonName ?TaxonReference ?SiteName ?North ?East  
 WHERE{
@@ -98,8 +99,9 @@ WHERE{
 }LIMIT 10"""
 Q8 = """
 """
+# each query is mapped here
 queryHash = {"Q2":Q2,"Q3":Q3,"Q10":Q10,"Q1":Q1,"Q4":Q4,"Q5":Q5,"Q6":Q6,"Q7":Q7}
-
+# each query question we need to display to the user.
 queryQuestion = [
     "Q1: Give information about Species found in the county = ",
     "Q2: Query over date",
