@@ -87,8 +87,18 @@ UNION
     }
 }LIMIT 50
 """
-
-queryHash = {"Q2":Q2,"Q3":Q3,"Q10":Q10,"Q1":Q1,"Q4":Q4,"Q5":Q5,"Q6":Q6}
+Q7 = """
+SELECT DISTINCT ?TaxonName ?TaxonReference ?Habitat
+WHERE{
+    ?Record a <http://purl.org/ontology/wo/ToaxonName>; <http://xmlns.com/foaf/0.1/openid> ?TaxonReference;{ ?Record <http://example.org/csv/habitatdescription> ?Habitat;} UNION { ?Record <http://www.w3.org/2000/01/rdf-schema#comment> ?Habitat}
+    {
+        ?Record <http://purl.org/ontology/wo/taxonomicName> ?TaxonName .
+        FILTER regex(?TaxonName,"^(%s)") 
+    }
+}LIMIT 10"""
+Q8 = """
+"""
+queryHash = {"Q2":Q2,"Q3":Q3,"Q10":Q10,"Q1":Q1,"Q4":Q4,"Q5":Q5,"Q6":Q6,"Q7":Q7}
 
 queryQuestion = [
     "Q1: Give information about Species found in the county = ",
@@ -97,6 +107,6 @@ queryQuestion = [
     "Q4: Give the spieces which are at lifestage = ",
     "Q5: Give all the observations made by the researcher =",
     "Q6: Give all the speices for the gender = ",
-    "Q7: Query over Scientific Name starting with alphabet and their habitat",
+    "Q7: Query over Scientific Name starting with alphabet =",
     "Q10: Query yes or no whether any buterfly species is invasive to ireland"
 ]

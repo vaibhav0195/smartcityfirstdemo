@@ -26,7 +26,7 @@ def upload_file_browse():
 	queryId   = queryData["queryHash"].split(':')[0]
 	queryParams   = queryData["queryParams"]
 	if queryId not in ["Q2","Q3","Q10"]:
-		if queryId == "Q4":
+		if queryId == "Q4" or queryId == "Q7":
 			query = queryHash[queryId]%(queryParams)
 		else:
 			query = queryHash[queryId]%(queryParams,queryParams)
