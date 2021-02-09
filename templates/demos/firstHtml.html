@@ -1,0 +1,46 @@
+
+<html>
+<head>
+  <title>A Leaflet map!</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+  <style>
+    #map{ height: 100% }
+  </style>
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <script>
+      var map = L.map('map').setView([53.34497205360536,-6.254528675545078], 13);
+      let data = JSON.parse('{{data}}');
+      var pointList = []
+      for (let i = 0; i < data.length; i++) {
+                pointList.push(new L.LatLng(data[i][0],data[i][1]));
+              }
+        // var pointList = [new L.LatLng(53.3452183,-6.2550211),new L.LatLng(53.3458807,-6.2551333),new L.LatLng(53.3458676,-6.2541089),
+//new L.LatLng(53.3458229,-6.2530604),new L.LatLng(53.3457851,-6.2521162),new L.LatLng(53.3457108,-6.2512302),
+//new L.LatLng(53.3456427,-6.2504095) ]
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+        var firstpolyline = new L.Polyline(pointList, {
+    color: 'red',
+    weight: 3,
+    opacity: 0.5,
+    smoothFactor: 1
+});
+firstpolyline.addTo(map);
+
+        L.marker([53.34497205360536,-6.254528675545078]).addTo(map)
+            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+            .openPopup();
+  </script>
+</body>
+</html>

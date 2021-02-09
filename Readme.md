@@ -1,14 +1,9 @@
-# QueryInterface
-Query Interface for End term KE Assignment
-
 This app is built using python3.7 and html
 To install dependencies use
 ```
 pip install flask tornado sparqlwrapper
 ```
-To run the app First run the graphDB application locally
-edit the config.json with the port and host name of the graphDB
-Add repoID as the repository ID of the graphdb, then run the following command
+Add additional libs
 ```
 python app.py
 ```
