@@ -8,17 +8,18 @@ class SpawingStation:
     """
     This class can be used as a sole entity which can act as a hospital or as a police station.
     """
-    def __init__(self,name,startingLocation,numberOfspawns):
+    def __init__(self,name,startingLocation,spawningObjects):
         """
         initialise the spawing station,
         Args:
             name: type of spawing station
             startingLocation: coords of the spawing station
-            numberOfspawns: number of vans/vehicals this station can spawn
+            spawningObjects: list of objects from the class responseClasses which are the actual responses sent
         """
         self._type = name
         self._locationpoint = startingLocation
-        self._numberOfspawns = numberOfspawns
+        self._spawningObjs = spawningObjects
+        self._numberOfspawns = len(spawningObjects)
         logger.info("initialising the spawning station for type {}".format(name))
 
     def recieveInfo(self,location,numberofUnitsRequired,**kwargs):
@@ -38,10 +39,12 @@ class SpawingStation:
             latLongList = []
             for idx in range(0,numberofUnitsRequired):
                 self.sentunit()
-                latLongList.append([lat,long])
-            retJson = {'status':True,'latLong':latLongList,'numUnitsLeft':numberofUnitsRequired-self._numberOfspawns}
+                unitToSend = self._spawningObjs[idx]
+                unitToSend.setDirection([lat,long])
+                latLongList.append(unitToSend)
+            retJson = {'status':True,'units':latLongList,'numUnitsLeft':numberofUnitsRequired-self._numberOfspawns}
         else:
-            retJson = {'status':False,'latLong':[],'numUnitsLeft':numberofUnitsRequired}
+            retJson = {'status':False,'units':[],'numUnitsLeft':numberofUnitsRequired}
         return retJson
 
     def sentunit(self):

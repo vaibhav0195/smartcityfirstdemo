@@ -39,16 +39,22 @@ class ResponseSender:
 
         numResponseRequired = self.severitymap[self._severity]
         logger.info('Sending the units')
+        unitsSend = []
         for responseObj in self._stationMap:
             if responseObj.unitLeft() >0:
                 retJson = responseObj.recieveInfo(self._severity,self._location,numResponseRequired)
                 logger.info('sent {} units from {}'.format(numResponseRequired-retJson['numUnitsLeft'],responseObj))
                 if retJson['status']:
+                    unitsSend.extend(retJson['units'])
                     if retJson['numUnitsLeft'] == 0:
                         break
                     else:
                         numResponseRequired = retJson['numUnitsLeft']
         logger.info('sent all units now monitoring the disaster and waiting for it to end,')
+
+        return unitsSend
+
+    def continousMonitoring(self):
         isSevere = True
         while isSevere:
             currentSeverity = self.monitorSeverity()
@@ -61,7 +67,6 @@ class ResponseSender:
                     logger.info('helping worked now severity has reduced')
                     self._severity = currentSeverity
             time.sleep(30)
-
         return
 
     def resetAfterDisaster(self):

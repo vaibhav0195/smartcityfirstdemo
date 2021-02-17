@@ -1,20 +1,20 @@
-from responseFrame.responseClass import responseBase
+from responseFrame.responseClass.responseBase import Response
 
-class PoliceCar(responseBase,):
+class PoliceCar(Response,):
     def __init__(self,name,location):
         super().__init__(name,location)
 
     def actionAtSite(self):
         return 'block'
 
-class Firetruck(responseBase,):
+class Firetruck(Response,):
     def __init__(self,name,location):
         super().__init__(name,location)
 
     def actionAtSite(self):
         return 'Reduce Fire'
 
-class Ambulance(responseBase,):
+class Ambulance(Response,):
     def __init__(self,name,location):
         super().__init__(name,location)
 
