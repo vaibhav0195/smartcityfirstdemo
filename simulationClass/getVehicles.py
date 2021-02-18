@@ -30,7 +30,7 @@ class Routes:
                 self.vehicles[routeKey].setNewLocation(locationToUse)
 
         self.idx +=1
-        if self.idx >self.restart:
+        if self.idx >=self.restart:
             self.idx = 0
         return self.vehicles
 
