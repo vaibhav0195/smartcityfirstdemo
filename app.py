@@ -14,8 +14,8 @@ from flask import Flask, send_from_directory
 from tornado.httpserver import HTTPServer
 from tornado.ioloop import IOLoop
 from tornado.wsgi import WSGIContainer
+import trafficApi
 
-import keDemo
 logger = logging.getLogger(__name__)
 f = open('config.json', "r")
 constants = json.loads(f.read())
@@ -26,7 +26,7 @@ if __name__ == '__main__':
 	app = Flask(__name__) # Initialize the Flask application
 	# Registering different APIs
 	logger.info('Registering demo APIs blueprints')
-	app.register_blueprint(keDemo.demos)
+	app.register_blueprint(trafficApi.demos)
 
 	# @app.route('/favicon.ico')
 	# def favicon():
