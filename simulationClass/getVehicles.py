@@ -20,7 +20,7 @@ class Routes:
             pass
         self.vehicles = {}
         self.idx = 0 # index of start array
-
+        self.restart = len(self.routes[routeID])
     def getVehicleInformation(self):
         for routeKey in self.routes:
             locationToUse = self.routes[routeKey][self.idx]
@@ -30,7 +30,7 @@ class Routes:
                 self.vehicles[routeKey].setNewLocation(locationToUse)
 
         self.idx +=1
-        if self.idx >5:
+        if self.idx >self.restart:
             self.idx = 0
         return self.vehicles
 
